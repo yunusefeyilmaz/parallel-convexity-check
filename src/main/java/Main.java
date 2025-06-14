@@ -60,10 +60,10 @@ public class Main {
             // Arguman yok ise rastgele noktalar olustur
             else {
                 Random random = new Random();
-                int numberOfPoints = 10;
+                int numberOfPoints = 4;
                 for (int i = 0; i < numberOfPoints; i++) {
-                    int x = random.nextInt() * 1000;
-                    int y = random.nextInt() * 1000;
+                    int x = random.nextInt() * 100000;
+                    int y = random.nextInt() * 100000;
                     points.add(new Point(x, y));
                 }
                 System.out.println(numberOfPoints + " adet rastgele nokta olusturuldu.");

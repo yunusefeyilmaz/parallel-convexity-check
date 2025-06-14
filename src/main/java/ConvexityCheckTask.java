@@ -23,19 +23,18 @@ public class ConvexityCheckTask implements Runnable {
 
     @Override
     public void run() {
+        System.out.println("Checking convexity from index " + startIndex + " to " + endIndex);
         for (int i = startIndex; i < endIndex; i++) {
             if (!isStillConvex.get()  || Thread.currentThread().isInterrupted()) {
                 return;
             }
-            System.out.println("Checking convexity from index " + startIndex + " to " + endIndex);
-
 
             Point p = points.get(i);
             Point q = points.get((i + 1) % n);
             Point r = points.get((i + 2) % n);
 
             int orientation = ConvexChecker.calculateOrientation(p, q, r);
-
+            
             if (orientation != 0 && orientation != firstValidOrientation) {
                 isStillConvex.set(false);
                 return;

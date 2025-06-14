@@ -68,17 +68,18 @@ public class ConvexChecker {
             // Her thread için başlangıç ve bitiş indekslerini hesapla
             int start = i * pointsPerThread;
             int end = Math.min((i + 1) * pointsPerThread, n);
-            // Eğer başlangıç indeksi bitiş indeksinden küçükse, thread'i başlat
-            if (start >= n) break; // Eğer başlangıç indeksi n'den büyükse, döngüyü kır
+            
+            if (start >= n) continue; // Eğer başlangıç indeksi n'den büyükse, döngüyü kır
             if (end > n) end = n; // Bitiş indeksi n'den büyükse, n olarak ayarla
 
-            // Thread'in kontrol edeceği noktaları al
+            // Eğer başlangıç indeksi bitiş indeksinden küçükse, thread'i başlat
             if (start < end) {
                 ConvexityCheckTask task = new ConvexityCheckTask(points, start, end, firstValidOrientation, isStillConvex);
                 // Thread'i havuza ekle
                 tasks.add(task);
             }
         }
+        
         // Thread'leri çalıştır
         for (Runnable task : tasks) {
             executor.execute(task);
